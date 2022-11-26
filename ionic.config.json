@@ -1,0 +1,7 @@
+{
+  "name": "The LOM's Challenge",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
