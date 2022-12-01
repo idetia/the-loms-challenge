@@ -1,0 +1,61 @@
+header.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 30rem;
+  background-color: var(--color-deep-purple);
+
+  h1 {
+    font-family: "Bungee", sans-serif;
+    font-size: 4rem;
+    text-shadow: 0 8px rgba(0, 0, 0, 0.5);
+
+    .challenge {
+      font-size: 6rem;
+      text-transform: uppercase;
+      color: var(--color-yellow);
+    }
+  }
+}
+
+main.main-content {
+  max-width: 60rem;
+  margin: auto;
+  padding: 4rem 0;
+
+  .intro {
+    font-size: 2rem;
+    line-height: 3rem;
+    text-align: center;
+
+    .highlight {
+      color: var(--color-yellow);
+      font-size: 2.4rem;
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  header.main-header {
+    flex-direction: column;
+    height: 30rem;
+
+    h1 {
+      font-size: 3rem;
+      text-shadow: 0 6px rgba(0, 0, 0, 0.5);
+
+      .challenge {
+        font-size: 4rem;
+      }
+    }
+  }
+
+  main.main-content {
+    padding: 3rem 2rem 6rem;
+
+    .intro {
+      font-size: 1.8rem;
+    }
+  }
+}

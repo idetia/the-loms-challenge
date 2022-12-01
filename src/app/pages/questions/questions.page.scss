@@ -1,0 +1,138 @@
+ion-content {
+  --padding-bottom: 3rem;
+  --padding-end: 3rem;
+  --padding-start: 3rem;
+  --padding-top: 3rem;
+
+  .content {
+    background-color: rgba(0, 0, 0, 0.2);
+    min-height: 100%;
+    border-radius: 2rem;
+    padding: 3rem;
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+    line-height: 3rem;
+    text-align: center;
+
+    strong {
+      color: var(--color-yellow);
+    }
+
+    ion-spinner {
+      transform: scale(3);
+    }
+
+    .intro,
+    .loading,
+    .error-alert {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .error-alert {
+      color: var(--color-red);
+    }
+
+    .questions {
+      min-height: 100%;
+    }
+  }
+}
+
+ion-footer {
+  padding: 0 3rem 3rem;
+  background-color: var(--color-soft-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .results {
+    background-color: rgba(0, 0, 0, 0.2);
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    padding: 0.3rem;
+    width: 100%;
+    border-radius: 2rem;
+
+    .result {
+      width: calc((100% / var(--total-questions)) - 0.6rem);
+      margin: 0 0.3rem;
+      border-radius: 2rem;
+      cursor: pointer;
+      color: #fff;
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 900;
+
+      &.ok {
+        background-color: var(--color-green);
+      }
+
+      &.wrong {
+        background-color: var(--color-red);
+      }
+
+      &.empty {
+        background-color: rgba(#fff, 0.4);
+        color: var(--color-deep-purple);
+      }
+    }
+  }
+
+  button {
+    border-radius: 1rem;
+    font-family: "Bungee", sans-serif;
+    font-size: 2rem;
+    color: #fff;
+    background-color: var(--color-purple);
+    padding: 2rem 3rem;
+    box-shadow: 0 0px 6px 3px var(--color-deep-purple);
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      background-color: var(--color-red);
+      box-shadow: 0 0px 12px 10px var(--color-deep-purple);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      background-color: #666;
+    }
+  }
+
+  ion-icon {
+    margin-left: 1rem;
+    transform: scale(1.5);
+  }
+}
+
+@media (max-width: 575px) {
+  ion-content {
+    --padding-bottom: 2rem;
+    --padding-end: 2rem;
+    --padding-start: 2rem;
+    --padding-top: 2rem;
+
+    .content {
+      padding: 2rem;
+      font-size: 1.8rem;
+      line-height: 2.8rem;
+    }
+  }
+
+  ion-footer {
+    padding: 0 2rem 2rem;
+
+    .results {
+      margin-bottom: 2rem;
+    }
+  }
+}

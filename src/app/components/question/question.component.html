@@ -1,0 +1,65 @@
+<div class="block-question">
+  <div
+    class="question"
+    [innerHTML]="index + 1 + '. ' + question.question"
+  ></div>
+  <form [formGroup]="answerForm" class="answers">
+    <ng-container
+      *ngTemplateOutlet="
+        formType === 'input' ? inputForm : checkForm;
+        context: { answerForm }
+      "
+    ></ng-container>
+  </form>
+</div>
+
+<ng-template #inputForm let-answerForm="answerForm">
+  <input
+    placeholder="Enter your answer..."
+    type="text"
+    [name]="'answer' + index"
+    [formControl]="answerForm.get('answer')"
+  />
+  <div
+    class="correct-answer-alert"
+    *ngIf="
+      answerForm.get('answer').value.toLowerCase() ===
+        question.correctAnswer.toLowerCase() && isResolved
+    "
+  >
+    <ion-icon name="checkmark-circle-outline"></ion-icon> That is ok!
+  </div>
+  <div
+    class="wrong-answer-alert"
+    *ngIf="
+      answerForm.get('answer').value.toLowerCase() !==
+        question.correctAnswer.toLowerCase() && isResolved
+    "
+  >
+    <ion-icon name="alert-circle-outline"></ion-icon>
+    <div>
+      Sorry, that is wrong! The right answer is &nbsp;<strong
+        [innerHTML]="question.correctAnswer"
+      ></strong>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #checkForm let-answerForm="answerForm">
+  <div class="answer" *ngFor="let answer of answers; index as answerIndex">
+    <label
+      [for]="index + '_' + answerIndex"
+      [ngClass]="{
+        'correct-answer': answer === question.correctAnswer && isResolved,
+        'wrong-answer': answer !== question.correctAnswer && isResolved
+      }"
+      ><input
+        [id]="index + '_' + answerIndex"
+        [formControl]="answerForm.get('answer')"
+        type="radio"
+        [name]="'answer' + index"
+        [value]="answer" />
+      <span [innerHTML]="answer"></span
+    ></label>
+  </div>
+</ng-template>

@@ -1,0 +1,49 @@
+<ion-content>
+  <div class="content">
+    <div class="results" *ngIf="results">
+      <circle-progress
+        [percent]="success * 10"
+        [radius]="80"
+        [space]="-10"
+        [outerStrokeGradient]="true"
+        [outerStrokeWidth]="10"
+        [outerStrokeColor]="'#462061'"
+        [outerStrokeGradientStopColor]="'#462061'"
+        [innerStrokeColor]="'#5d5562'"
+        [innerStrokeWidth]="10"
+        [title]="(success * 10) + '%'"
+        [animateTitle]="false"
+        [animationDuration]="1000"
+        [showSubtitle]="false"
+        [showUnits]="false"
+        [showBackground]="false"
+        [startFromZero]="false"
+        [titleFontWeight]="'600'"
+        [titleFontSize]="'26'"
+        [titleColor]="'#ffffff'"
+      ></circle-progress>
+
+      <div class="kpis">
+        <div class="success">
+          <h2>{{ success }}</h2>
+          <div class="text">Correct questions</div>
+        </div>
+        <div class="errors">
+          <h2>{{ errors }}</h2>
+          <div class="text">Wrong questions</div>
+        </div>
+      </div>
+
+      <p *ngIf="success !== results.length">
+        You failed to pass the LOM's challenge. Humanity will be destroyed in 5,
+        4, 3, 2, 1 ...
+      </p>
+
+      <p *ngIf="success === results.length">
+        You are a hero! Humanity has been saved thanks to your knowledge.
+      </p>
+
+      <button class="start-button" (click)="close()">Close</button>
+    </div>
+  </div>
+</ion-content>

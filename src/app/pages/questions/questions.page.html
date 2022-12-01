@@ -1,0 +1,81 @@
+<ion-content>
+  <div class="content questions-component">
+    <div class="intro" *ngIf="!started">
+      <p>The challenge is a quiz-game.</p>
+      <p>
+        LOM has selected <strong>10 questions</strong> about human knowledge,
+        you must get all them to win the challenge and save the humanity.
+      </p>
+
+      <button class="start-button" (click)="startTest()">Start</button>
+    </div>
+
+    <div class="questions" *ngIf="started">
+      <ng-container
+        *ngIf="questions$ | async as questions; else loadingOrError"
+      >
+        <question
+          *ngFor="let question of questions; index as i"
+          [hidden]="i !== activedQuestionIndex"
+          [question]="question"
+          [index]="i"
+          (result)="questionResult($event)"
+          (validation)="validateForm($event)"
+        ></question>
+      </ng-container>
+
+      <ng-template #loadingOrError>
+        <ng-container *ngIf="questionsError; else loading">
+          <div class="error-alert">
+            Oops! There has been an error: <br />{{ questionsError.message }}
+          </div>
+        </ng-container>
+
+        <ng-template #loading>
+          <div class="loading">
+            <ion-spinner name="dots"></ion-spinner>
+          </div>
+        </ng-template>
+      </ng-template>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer *ngIf="started">
+  <div class="results">
+    <div
+      class="result"
+      *ngFor="let result of results; index as i"
+      [ngClass]="{'ok': result, 'wrong': !result, 'empty': result == null}"
+      style="--total-questions: {{ totalQuestions }}"
+      (click)="goToQuestion(i)"
+    >
+      {{ i+ 1 }}
+    </div>
+  </div>
+  <button
+    class="button-check-answer"
+    *ngIf="!activedQuestion?.isResolved"
+    [disabled]="activedQuestionIndex < results.length - 1 || !isFormValid"
+    (click)="activedQuestion?.resolve()"
+  >
+    Check answer <ion-icon name="help-circle-outline"></ion-icon>
+  </button>
+  <div *ngIf="activedQuestion != null && activedQuestion.isResolved">
+    <button
+      class="button-next-question"
+      [disabled]="activedQuestionIndex < results.length - 1"
+      (click)="nextQuestion()"
+      *ngIf="results.length < totalQuestions"
+    >
+      Next question <ion-icon name="arrow-forward-outline"></ion-icon>
+    </button>
+    <button
+      class="button-finish-test"
+      (click)="finishTest()"
+      *ngIf="results.length === totalQuestions"
+    >
+      Finish test
+    </button>
+  </div>
+</ion-footer>
