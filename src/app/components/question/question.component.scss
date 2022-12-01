@@ -6,6 +6,7 @@
   .question {
     font-weight: 700;
     padding: 3rem;
+    color: #fff;
   }
 
   .answers {
@@ -16,6 +17,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    color: #fff;
 
     input[type="text"] {
       width: 100%;
@@ -71,6 +73,7 @@
         cursor: pointer;
         padding: 1rem 2rem;
         border-radius: 1rem;
+        color: #fff;
 
         &:has(input[type="radio"]:checked) {
           background-color: var(--color-purple);
